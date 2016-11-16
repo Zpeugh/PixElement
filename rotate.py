@@ -102,7 +102,7 @@ def get_arguments():
     parser.add_argument('output_file', help="The output file name")
 
     # optional arguments
-    parser.add_argument('-deg', help="The number of degrees to rotate the object counterclockwise by")
+    parser.add_argument('-deg', type=float, help="The number of degrees to rotate the object counterclockwise by")
     parser.add_argument('-ax', help="3D array of axis to rotate by.  i.e. [0,0,1]")
 
     args = parser.parse_args()
@@ -110,7 +110,7 @@ def get_arguments():
     if not args.deg:
         args.deg = 90
     if not args.ax:
-        args.ax = [0,0,1]
+        args.ax = [0,1,0]
     return args
 
 
