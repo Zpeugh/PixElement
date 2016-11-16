@@ -21,9 +21,10 @@
 | Write automated tests for your code (or, even better, test-drive your code)                                                                                  |          |
 | Don't use any (explicit) loops. (a.k.a. map/reduce paradigm)                                                                                                 |          |
 
+###Dependencies
+numpy (`pip install numpy`)
 
-
-####Running the program
+###Running the program
 From a terminal, when in this directory use the command
 <br />
 `python rotate.py -h`
