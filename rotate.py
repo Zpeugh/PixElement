@@ -10,6 +10,7 @@
 import argparse
 import numpy as np
 import math
+import re
 
 VERTEX_MARKER = 'v'
 OBJ_EXT = ".obj"
@@ -94,6 +95,47 @@ def write_object(file_name, vertices, other_lines):
     f.close()
 
 
+'''
+    Returns the 3D axis of the mean vertex coordinates
+'''
+def mean_axis(vertices):
+    return np.mean(vertices, axis=0)
+
+
+'''
+    Returns the volumetric center coordinates of the box containing the object
+'''
+def center_volume_axis(vertices):
+    x_max, y_max, z_max = np.max(vertices, axis=0)
+    x_min, y_min, z_min = np.min(vertices, axis=0)
+    return np.array([(x_max+x_min) / 2.0, (y_max+y_min) / 2.0, (z_max+z_min) / 2.0])
+
+'''
+    Takes a string like '[1, 2.0, -1.1]' and returns an array of floats
+'''
+def parse_string_as_array(string):
+    return map(float, re.findall(r"[-+]?\d*\.\d+|\d+", string))
+
+
+'''
+    Return correct axis based on input parameters
+'''
+def get_axis(args, vertices):
+    if args.mean_ax:
+        axis = mean_axis(vertices)
+    elif args.volume_ax:
+        axis = center_volume_axis(vertices)
+    elif args.ax is not None:
+        axis = parse_string_as_array(args.ax)
+    else:
+        axis = args.ax
+
+    return axis
+
+'''
+    Set up the commandline arguments for running the script.  Return a Namepace object
+    containing all of the arguments properly formatted
+'''
 def get_arguments():
     parser = argparse.ArgumentParser(prog='rotate', description='Rotate a .obj file object about an axis and write the output to disk')
 
@@ -101,26 +143,24 @@ def get_arguments():
     parser.add_argument('input_file', help="The input .obj file name")
     parser.add_argument('output_file', help="The output file name")
 
-    # optional arguments
-    parser.add_argument('-deg', type=float, help="The number of degrees to rotate the object counterclockwise by")
-    parser.add_argument('-ax', help="3D array of axis to rotate by.  i.e. [0,0,1]")
+    # optional arguments with input
+    parser.add_argument('-deg', type=float, default=90.0, help="The number of degrees to rotate the object counterclockwise by")
+    parser.add_argument('-ax', type=str, help="3D array of axis to rotate by.  i.e. [0,0,1]")
 
+    # boolean arguments
+    parser.add_argument('--mean_ax', default=False, action="store_true", help="Boolean flag to rotate around the mean of the vertice coordinates")
+    parser.add_argument('--volume_ax', default=False, action="store_true", help="Boolean flag to rotate around the volumetric center of the box containing the object")
     args = parser.parse_args()
 
-    if not args.deg:
-        args.deg = 90
-    if not args.ax:
-        args.ax = [0,1,0]
     return args
 
 
 ################################### Begin Script ###################################
 
 args = get_arguments()
-
 vertices, other_lines = load_object(args.input_file)
-
-rot_mat = rotation_matrix(args.ax, args.deg)
+axis = get_axis(args, vertices)
+rot_mat = rotation_matrix(axis, args.deg)
 vertices = np.dot(vertices, rot_mat)
 
 write_object(args.output_file, vertices, other_lines)
