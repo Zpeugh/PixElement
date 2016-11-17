@@ -11,15 +11,15 @@
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
 | Use Python                                                                                                                                                   | Done     |
 | Use git, and commit frequently.                                                                                                                              | Done     |
-| Let me know how much time the project took. (No need to rush it.)                                                                                            | 3.5 hrs |
+| Let me know how much time the project took. (No need to rush it.)                                                                                            | 4 hrs |
 | Use CloudCompare, Blender, or another tool to take a screenshot of the input and output.                                                                     | Blender  |
-| Rotate around either the mean of the vertex coordinates, or around the center of the object's volume (the box containing the points) based on a boolean flag |          |
+| Rotate around either the mean of the vertex coordinates, or around the center of the object's volume (the box containing the points) based on a boolean flag | Done     |
 | Let the user specify what input file to use via command-line argument.                                                                                       | Done     |
 | Let the user specify how many degrees of rotation to apply (also via argument).                                                                              | Done     |
 | Let the user specify which center (mass or volume) to rotate around.                                                                                         |          |
 | Let the user specify the axis of rotation as a vector.                                                                                                       | Done     |
 | Write automated tests for your code (or, even better, test-drive your code)                                                                                  |          |
-| Don't use any (explicit) loops. (a.k.a. map/reduce paradigm)                                                                                                 | None yet |
+| Don't use any (explicit) loops. (a.k.a. map/reduce paradigm)                                                                                                 | Done    |
 
 ###Dependencies
 numpy (`pip install numpy`)
