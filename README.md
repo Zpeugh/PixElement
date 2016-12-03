@@ -8,7 +8,7 @@
 
 ###Bonus points (entirely optional; pick-and-choose):
 | Bonus Task Description                                                                                                                                       |  Status  |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|
 | Use Python                                                                                                                                                   | Done     |
 | Use git, and commit frequently.                                                                                                                              | Done     |
 | Let me know how much time the project took. (No need to rush it.)                                                                                            | ~4.5 hrs |
@@ -30,9 +30,11 @@ The simplest way to run the program is from the terminal, when in this directory
 <br />
 `python rotate.py <input file> <output file>`
 <br />
+<br />
 To get a list of all of the optional flags and arguments, type
 <br />
 `python rotate.py -h`
+<br />
 <br />
 
 ####Results
