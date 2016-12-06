@@ -37,7 +37,6 @@ def load_object(file_name):
             if line[0] == VERTEX_MARKER and line[1] == ' ':
                 if len(vertices) == 0:
                     vertices = read_three_floats(line)
-                    print(vertices)
                 else:
                     vertices = np.vstack((vertices, read_three_floats(line)))
             else:
@@ -121,14 +120,12 @@ def parse_string_as_array(string):
     Return correct axis based on input parameters
 '''
 def get_axis(args, vertices):
-    if args.mean_ax:
-        axis = mean_axis(vertices)
-    elif args.volume_ax:
+    if args.volume_ax:
         axis = center_volume_axis(vertices)
     elif args.ax is not None:
         axis = parse_string_as_array(args.ax)
     else:
-        axis = args.ax
+        axis = mean_axis(vertices)
 
     return axis
 
